@@ -1,0 +1,6 @@
+com\example\demo6\Controller\BoardController.class
+com\example\demo6\Service\Impl\BoardServiceImpl.class
+com\example\demo6\Mapper\BoardMapper.class
+com\example\demo6\Demo6Application.class
+com\example\demo6\Domain\Board.class
+com\example\demo6\Service\BoardService.class
