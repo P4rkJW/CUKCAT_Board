@@ -6,6 +6,8 @@ import com.example.demo6.Mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BoardServiceImpl implements BoardService{
 
@@ -22,4 +24,18 @@ public class BoardServiceImpl implements BoardService{
     public void DeleteBoard(Board board){
         boardMapper.BoardDelete(board);
     }
+
+    @Override
+    public void UpdateBoard(Board board){
+        boardMapper.BoardUpdate(board);
+    }
+
+    @Override
+    public Board SelectBoard(Board board){
+        return boardMapper.BoardSelect(board);
+    }
+
+    @Override
+    public List<Board> RankListBoard() { return boardMapper.RankListBoard(); }
+
 }

@@ -4,13 +4,16 @@
     <insert id="Boardinsert" parameterType="string">
         INSERT INTO board2 (file, title, content) VALUES (#{file}, #{title}, #{content})
     </insert>
-<!--    <update id="update" parameterType="String">-->
-<!--        UPDATE user SET id=#{newID} WHERE id=#{id}-->
-<!--    </update>-->
+    <update id="BoardUpdate" parameterType="String">
+        UPDATE board2 SET title=#{title}, content=#{content}, file=#{file} WHERE seq=#{seq}
+    </update>
     <delete id="BoardDelete" parameterType="int">
         DELETE FROM board2 WHERE seq = #{seq}
     </delete>
-<!--    <select id="select" resultType="com.web.domain.User" parameterType="String">-->
-<!--        SELECT * FROM user WHERE id = #{id}-->
-<!--    </select>-->
+    <select id="BoardSelect" resultType="com.example.demo6.Domain.Board" parameterType="int">
+        SELECT * FROM board2 WHERE seq = #{seq}
+    </select>
+    <select id="RankListBoard" resultType="com.example.demo6.Domain.Board">
+        SELECT * FROM board2
+    </select>
 </mapper>
