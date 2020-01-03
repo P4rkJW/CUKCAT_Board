@@ -10,4 +10,6 @@ public interface BoardService {
     public void UpdateBoard(Board board);
     public Board SelectBoard(Board board);
     public List<Board> RankListBoard();
+    public void RecommandBoard(Board board);
+    public void OpposeBoard(Board board);
 }

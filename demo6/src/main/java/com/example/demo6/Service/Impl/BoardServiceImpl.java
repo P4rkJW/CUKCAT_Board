@@ -38,4 +38,9 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public List<Board> RankListBoard() { return boardMapper.RankListBoard(); }
 
+    @Override
+    public void RecommandBoard(Board board) { boardMapper.BoardRecommand(board); }
+
+    @Override
+    public void OpposeBoard(Board board) { boardMapper.BoardOppose(board); }
 }

@@ -1,8 +1,11 @@
 package com.example.demo6.Controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.example.demo6.Domain.Board;
-import org.apache.ibatis.javassist.bytecode.analysis.MultiType;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class BoardController {
 
@@ -39,18 +41,18 @@ public class BoardController {
         return "board/write";
     }
 
-    public static Path path = Paths.get(System.getProperty("user.home"), ".upload");
+    public static Path path = Paths.get(System.getProperty("user.dir"), ".upload");
 
     @PostMapping("/write_proc")
-    public String write_proc(@RequestParam("file") String filename, @RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("file") MultipartFile multipartfile){
-
-        File targetFIle = new File(path.resolve(multipartfile.getOriginalFilename()).toString());
+    public String write_proc(@RequestParam("title") String title, @RequestParam("file") MultipartFile multipartFile) throws IOException {
+        File tmp = new File(System.getProperty("user.dir")+"\\target\\classes\\static\\img\\"+multipartFile.getOriginalFilename());
+        multipartFile.transferTo(tmp);
+        String filename = multipartFile.getOriginalFilename();
         Board board = new Board();
-        board.setContent(content);
         board.setFile(filename);
         board.setTitle(title);
         boardService.InsertBoard(board);
-        return "index";
+        return "redirect:/rank";
     }
 
     @GetMapping("/delete")
@@ -63,7 +65,7 @@ public class BoardController {
         Board board = new Board();
         board.setSeq(seq);
         boardService.DeleteBoard(board);
-        return "index";
+        return "redirect:/rank";
     }
 
     @GetMapping("/update")
@@ -82,6 +84,21 @@ public class BoardController {
         return "index";
     }
 
+    @GetMapping("/recommand")
+    public String recommand(@RequestParam("seq") int seq){
+        Board board = new Board();
+        board.setSeq(seq);
+        boardService.RecommandBoard(board);
+        return "redirect:/rank";
+    }
+
+    @GetMapping("/oppose")
+    public String oppose(@RequestParam("seq") int seq){
+        Board board = new Board();
+        board.setSeq(seq);
+        boardService.OpposeBoard(board);
+        return "redirect:/rank";
+    }
 
 
 }

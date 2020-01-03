@@ -12,5 +12,6 @@ public interface BoardMapper {
     public void BoardUpdate(Board board);
     public Board BoardSelect(Board board);
     public List<Board> RankListBoard();
-
+    public void BoardRecommand(Board board);
+    public void BoardOppose(Board board);
 }

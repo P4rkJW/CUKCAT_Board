@@ -8,6 +8,8 @@ public class Board {
     private String newfile;
     private String newtitle;
     private String newcontent;
+    private int recommand;
+    private int oppose;
 
     public void setSeq(int seq){ this.seq = seq; }
 
@@ -32,5 +34,11 @@ public class Board {
     public String getTitle() { return title; }
 
     public String getFile() { return file; }
+
+    public int getSeq() { return seq; }
+
+    public int getRecommand() { return recommand; }
+
+    public int getOppose() { return  oppose; }
 
 }
